@@ -4,21 +4,24 @@ public class BankMain {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Account b1=new Account(750);
-		for(int i=0;i<100;i++) {
-			
-			if(i%2==0) {
-				SyncOnlineBank t=new SyncOnlineBank(b1,500,false);
-				t.start();
-			}
-			else {
-				SyncOnlineBank t=new SyncOnlineBank(b1,500,true);
-				t.start();
-			}
-			
+		Account b1=new Account(51);
+		SyncOnlineBank s1=new SyncOnlineBank(b1,false);
+		SyncOnlineBank s2=new SyncOnlineBank(b1,false);
+		UnsyncBank us1=new UnsyncBank(b1,false);
+		UnsyncBank us2=new UnsyncBank(b1,false);
+		//s1.start();
+		//s2.start();
+		//System.out.println("End balance after synchronized is "+b1.getBalance());
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		us1.start();
+		us2.start();
 		
-		System.out.println(b1.getBalance());
+		System.out.println("End balance after unsynchronized is "+b1.getBalance());
 	}
 	
 
