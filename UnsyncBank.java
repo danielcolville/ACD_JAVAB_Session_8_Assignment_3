@@ -1,16 +1,16 @@
 package session8;
 
-public class SyncOnlineBank extends Thread {
+public class UnsyncBank extends Thread {
 	boolean deposit;
 	static Account t;
-	SyncOnlineBank(Account t,boolean deposit) {
+	UnsyncBank(Account t,boolean deposit) {
 		this.t=t;
 		this.deposit=deposit;
 	}
-	synchronized static void deposit(double amt) {
+	static void deposit(double amt) {
 		t.deposit(amt);
 	}
-	synchronized static void withdrawM(double amount) {
+	static void withdrawM(double amount) {
 		if(t.getBalance()>amount) {
 			t.withdraw(amount);
 		}
@@ -21,7 +21,7 @@ public class SyncOnlineBank extends Thread {
 	synchronized public void run() {
 		for(int i=0;i<100;i++) {
 			withdrawM(50);
-			deposit(50);
+			deposit(50);	
 		}
 	}
 }
